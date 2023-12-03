@@ -75,7 +75,7 @@ main {
   font-size: 18px;
 }
 
-#answers li {
+#answers button {
   margin: auto;
   margin-top: 15px;
   padding: 10px;
@@ -87,7 +87,7 @@ main {
   font-size: x-large;
 }
 
-#answers li:hover {
+#answers button:hover {
   text-decoration: underline;
   cursor: pointer;
 }
