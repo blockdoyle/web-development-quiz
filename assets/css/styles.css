@@ -33,7 +33,7 @@ main {
 }
 
 #highscore-window {
-    display: flex;
+    display: none;
     flex-direction: column;
     position: absolute;
     padding: 20px;
@@ -51,6 +51,7 @@ main {
   border-radius: 2em;
   margin-top: 10%;
   width: 70%;
+  padding: 20px;
   padding-bottom: 100px;
   background: rgb(2, 0, 36);
   background: linear-gradient(
@@ -64,18 +65,18 @@ main {
 
 #question-card-items {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column;
   text-align: center;
 }
 
-#question {
+#question-container {
   margin-bottom: 100px;
   color: white;
   padding: 10px;
-  font-size: 18px;
+  font-size: 36px;
 }
 
-#answers button {
+#options-container button {
   margin: auto;
   margin-top: 15px;
   padding: 10px;
@@ -88,7 +89,7 @@ main {
   font-size: x-large;
 }
 
-#answers button:hover {
+#options-container button:hover {
   text-decoration: underline;
   cursor: pointer;
 }
