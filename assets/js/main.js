@@ -5,8 +5,8 @@ var currentScoreEl = document.querySelector("#current-score");
 var correctButton = document.querySelector(".correct");
 var incorrectButton = document.querySelector(".incorrect");
 var highscoreButton = document.querySelector("#highscore-button");
-var questionEl = document.querySelector("#question");
-var answersEl = document.querySelector("answers");
+var questionEl = document.getElementById("question");
+var answersEl = document.getElementById("answers");
 
 // Toggles the highscore window from showing/hiding.
 function showHideHighscore () {
@@ -41,38 +41,47 @@ function registerHighscore () {
 }
 
 // Gets the current score and adds 1 to it.
-function correctAnswer () {
-    // highscore variable
-    highscore = highscoreNumberEl.textContent // to be changed to localstorage value
-    
-    currentScore = currentScoreEl.textContent
-    currentScore++;
-    currentScoreEl.textContent = currentScore;
-    if (currentScore > highscore) {
-        registerHighscore(currentScore);
-    }
-}
+function checkAnswer () {
 
-// minus 5 points
-function incorrectAnswer () {
-    currentScore = currentScoreEl.textContent;
-    subtractFive = currentScore - 5;
-    // if statement to stop score from going past 0
-    if (subtractFive <= 0) {
-        currentScoreEl.textContent = 0;
-    } else {
-        currentScoreEl.textContent = subtractFive;
-    }
 }
 
 // Questions & Answers
-var questionsAnswers = {
-    question: "What did the quick brown fox do?",
-    answer1: "Jump over the lazy dog",
-    answer2: "run into the TARDIS",
-    answer3: "played Global Thermonucleare Warfare",
-    answer4: "cut Frank Poole's life support, while in space"
+const quizQuestions = [
+    {
+      question: 'What did the quick brown fox do?',
+      options: ['Cut Frank Poole\'s life support', 'Jump over the lazy dog', 'Play Global Thermonuclear Warfare', 'Run into the TARDIS'],
+      correctAnswer: 'Jump over the lazy dog'
+    },
+    {
+      question: 'Which planet is known as the Red Planet?',
+      options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
+      correctAnswer: 'Mars'
+    },
+    // Add more questions as needed
+  ];
+  
+// Assuming you have an HTML element with an ID of 'question-container'
+var questionContainer = document.getElementById('question-container');
+
+// Function to display a question
+function displayQuestion(question) {
+  questionContainer.textContent = question.question;
+  
+  // Assuming you have an HTML element with an ID of 'options-container'
+  var optionsContainer = document.getElementById('options-container');
+  optionsContainer.innerHTML = '';
+
+  question.options.forEach(option => {
+    var optionElement = document.createElement('button');
+    optionElement.textContent = option;
+    optionElement.addEventListener('click', () => checkAnswer(option, question.correctAnswer));
+    optionsContainer.appendChild(optionElement);
+  });
 }
+
+// Example usage
+displayQuestion(quizQuestions[0]);
+
 
 correctButton.addEventListener("click", correctAnswer);
 incorrectButton.addEventListener("click", incorrectAnswer);
