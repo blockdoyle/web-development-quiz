@@ -4,85 +4,113 @@ var timeLeftEl = document.querySelector("#time-left");
 var currentScoreEl = document.querySelector("#current-score");
 var correctButton = document.querySelector(".correct");
 var incorrectButton = document.querySelector(".incorrect");
-var highscoreButton = document.querySelector("#highscore-button");
+var highscoreButton = document.getElementById("highscore-button");
 var questionEl = document.getElementById("question");
 var answersEl = document.getElementById("answers");
+// set the question index to 0. this will pull the first question and the set of answers to go with it from the array.
+var currentQuestionIndex = 0;
 
+// Highscore
 // Toggles the highscore window from showing/hiding.
-function showHideHighscore () {
-    var x = document.getElementById("highscore-window");
-    if (x.style.display === "none") {
-        x.style.display = "flex";
-    } else {
-        x.style.display = "none";
-    }
-}
-
-// Starts countdown from 90 seconds and runs until it reaches 0.
-function timeCountdown() {
-    currentTime = 90;
-    
-    var timeInterval = setInterval(function () {
-        if (currentTime > 0) {
-            currentTime--;
-            timeLeftEl.textContent = currentTime;
-        } else if (currentTime = 0) {
-            timeLeftEl.textContent = "Game Over";
-        } else {
-            clearInterval(timeInterval);
-        }
-        // console.log(timeLeftEl.textContent)
-    }, 1000);
+function showHideHighscore() {
+  var x = document.getElementById("highscore-window");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
 }
 
 // Takes the total score and stores it in local storage.
-function registerHighscore () {
-    highscoreNumberEl.textContent = currentScoreEl.textContent;
+function registerHighscore() {
+  highscoreNumberEl.textContent = currentScoreEl.textContent;
 }
 
-// Gets the current score and adds 1 to it.
-function checkAnswer () {
 
+// Starts countdown from 90 seconds and runs until it reaches 0.
+function timeCountdown() {
+  var timeInterval = setInterval(function () {
+    var currentTime = timeLeftEl.textContent;
+    if (currentTime > 0) {
+      currentTime--;
+      timeLeftEl.textContent = currentTime;
+    } else {
+      timeLeftEl.textContent = "Game Over";
+      clearInterval(timeInterval);
+    }
+    // console.log(timeLeftEl.textContent)
+  }, 1000);
 }
 
+// Main card stuff
 // Questions & Answers
 const quizQuestions = [
-    {
-      question: 'What did the quick brown fox do?',
-      options: ['Cut Frank Poole\'s life support', 'Jump over the lazy dog', 'Play Global Thermonuclear Warfare', 'Run into the TARDIS'],
-      correctAnswer: 'Jump over the lazy dog'
-    },
-    {
-      question: 'Which planet is known as the Red Planet?',
-      options: ['Earth', 'Mars', 'Venus', 'Jupiter'],
-      correctAnswer: 'Mars'
-    },
-    // Add more questions as needed
-  ];
-  
-// Assuming you have an HTML element with an ID of 'question-container'
-var questionContainer = document.getElementById('question-container');
+  {
+    question: "What did the quick brown fox do?",
+    options: [
+      "Cut Frank Poole's life support",
+      "Jump over the lazy dog",
+      "Play Global Thermonuclear Warfare",
+      "Run into the TARDIS",
+    ],
+    correctAnswer: "Jump over the lazy dog",
+  },
+  {
+    question: "Test",
+    options: ["Correct", "Incorrect", "Incorrect", "Incorrect"],
+    correctAnswer: "Correct",
+  },
+  // Add more questions as needed
+];
+
+// check if the selected answer is the correct answer
+function checkAnswer(selected, correct) {
+  var currentScore = currentScoreEl.textContent;
+  var currentTime = timeLeftEl.textContent;
+  var subtractTime = currentTime - 5;
+  // if the answer is correct, add 1 to the current score.
+  if (selected == correct) {
+    currentScore++;
+    currentScoreEl.textContent = currentScore;
+    registerHighscore();
+
+    // Move to next question
+    currentQuestionIndex++;
+
+    // Check if there are more questions
+    if (currentQuestionIndex < quizQuestions.length) {
+      // Display the next question
+      displayQuestion(quizQuestions[currentQuestionIndex]);
+    }
+    // otherwise, remove 5 seconds from the countdown
+  } else {
+    timeLeftEl.textContent = subtractTime;
+  }
+}
+
+// create a variable for question-container id.
+var questionContainer = document.getElementById("question-container");
 
 // Function to display a question
 function displayQuestion(question) {
   questionContainer.textContent = question.question;
-  
-  // Assuming you have an HTML element with an ID of 'options-container'
-  var optionsContainer = document.getElementById('options-container');
-  optionsContainer.innerHTML = '';
 
-  question.options.forEach(option => {
-    var optionElement = document.createElement('button');
+  // create a variable for options-container id.
+  var optionsContainer = document.getElementById("options-container");
+  optionsContainer.innerHTML = "";
+
+  // creates a button for each answer in the object array.
+  question.options.forEach((option) => {
+    var optionElement = document.createElement("button");
     optionElement.textContent = option;
-    optionElement.addEventListener('click', () => checkAnswer(option, question.correctAnswer));
+    var result = optionElement.addEventListener("click", () =>
+      checkAnswer(option, question.correctAnswer)
+    );
     optionsContainer.appendChild(optionElement);
   });
 }
 
-// Example usage
-displayQuestion(quizQuestions[0]);
+displayQuestion(quizQuestions[currentQuestionIndex]);
 
-
-correctButton.addEventListener("click", correctAnswer);
-incorrectButton.addEventListener("click", incorrectAnswer);
+timeCountdown();
 highscoreButton.addEventListener("click", showHideHighscore);
