@@ -21,11 +21,13 @@ function showHideHighscore() {
   }
 }
 
+// when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
+highscoreButton.addEventListener("click", showHideHighscore);
+
 // Takes the total score and stores it in local storage.
 function registerHighscore() {
   highscoreNumberEl.textContent = currentScoreEl.textContent;
 }
-
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
 function timeCountdown() {
@@ -110,7 +112,11 @@ function displayQuestion(question) {
   });
 }
 
-displayQuestion(quizQuestions[currentQuestionIndex]);
+var startButtonEl = document.getElementById("start-button");
 
-timeCountdown();
-highscoreButton.addEventListener("click", showHideHighscore);
+function startGame () {
+  displayQuestion(quizQuestions[currentQuestionIndex]);
+  timeCountdown();
+}
+
+startButtonEl.addEventListener("click", startGame);
