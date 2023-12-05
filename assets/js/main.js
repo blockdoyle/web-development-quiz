@@ -4,76 +4,119 @@ var timeLeftEl = document.querySelector("#time-left");
 var currentScoreEl = document.querySelector("#current-score");
 var correctButton = document.querySelector(".correct");
 var incorrectButton = document.querySelector(".incorrect");
-var highscoreButton = document.querySelector("#highscore-button");
-var questionEl = document.querySelector("#question");
-var answersEl = document.querySelector("answers");
+var highscoreButton = document.getElementById("highscore-button");
+var questionEl = document.getElementById("question");
+var answersEl = document.getElementById("answers");
+// set the question index to 0. this will pull the first question and the set of answers to go with it from the array.
+var currentQuestionIndex = 0;
 
+// Highscore
 // Toggles the highscore window from showing/hiding.
-function showHideHighscore () {
-    var x = document.getElementById("highscore-window");
-    if (x.style.display === "none") {
-        x.style.display = "flex";
-    } else {
-        x.style.display = "none";
-    }
+function showHideHighscore() {
+  var x = document.getElementById("highscore-window");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+// when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
+highscoreButton.addEventListener("click", showHideHighscore);
+
+// Takes the total score and stores it in local storage.
+function registerHighscore() {
+  highscoreNumberEl.textContent = currentScoreEl.textContent;
 }
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
 function timeCountdown() {
-    currentTime = 90;
-    
-    var timeInterval = setInterval(function () {
-        if (currentTime > 0) {
-            currentTime--;
-            timeLeftEl.textContent = currentTime;
-        } else if (currentTime = 0) {
-            timeLeftEl.textContent = "Game Over";
-        } else {
-            clearInterval(timeInterval);
-        }
-        // console.log(timeLeftEl.textContent)
-    }, 1000);
+  var timeInterval = setInterval(function () {
+    var currentTime = timeLeftEl.textContent;
+    if (currentTime > 0) {
+      currentTime--;
+      timeLeftEl.textContent = currentTime;
+    } else {
+      timeLeftEl.textContent = "Game Over";
+      clearInterval(timeInterval);
+    }
+    // console.log(timeLeftEl.textContent)
+  }, 1000);
 }
 
-// Takes the total score and stores it in local storage.
-function registerHighscore () {
-    highscoreNumberEl.textContent = currentScoreEl.textContent;
-}
+// Main card stuff
+// Questions & Answers
+const quizQuestions = [
+  {
+    question: "What did the quick brown fox do?",
+    options: [
+      "Cut Frank Poole's life support",
+      "Jump over the lazy dog",
+      "Play Global Thermonuclear Warfare",
+      "Run into the TARDIS",
+    ],
+    correctAnswer: "Jump over the lazy dog",
+  },
+  {
+    question: "Test",
+    options: ["Correct", "Incorrect", "Incorrect", "Incorrect"],
+    correctAnswer: "Correct",
+  },
+  // Add more questions as needed
+];
 
-// Gets the current score and adds 1 to it.
-function correctAnswer () {
-    // highscore variable
-    highscore = highscoreNumberEl.textContent // to be changed to localstorage value
-    
-    currentScore = currentScoreEl.textContent
+// check if the selected answer is the correct answer
+function checkAnswer(selected, correct) {
+  var currentScore = currentScoreEl.textContent;
+  var currentTime = timeLeftEl.textContent;
+  var subtractTime = currentTime - 5;
+  // if the answer is correct, add 1 to the current score.
+  if (selected == correct) {
     currentScore++;
     currentScoreEl.textContent = currentScore;
-    if (currentScore > highscore) {
-        registerHighscore(currentScore);
+    registerHighscore();
+
+    // Move to next question
+    currentQuestionIndex++;
+
+    // Check if there are more questions
+    if (currentQuestionIndex < quizQuestions.length) {
+      // Display the next question
+      displayQuestion(quizQuestions[currentQuestionIndex]);
     }
+    // otherwise, remove 5 seconds from the countdown
+  } else {
+    timeLeftEl.textContent = subtractTime;
+  }
 }
 
-// minus 5 points
-function incorrectAnswer () {
-    currentScore = currentScoreEl.textContent;
-    subtractFive = currentScore - 5;
-    // if statement to stop score from going past 0
-    if (subtractFive <= 0) {
-        currentScoreEl.textContent = 0;
-    } else {
-        currentScoreEl.textContent = subtractFive;
-    }
+// create a variable for question-container id.
+var questionContainer = document.getElementById("question-container");
+
+// Function to display a question
+function displayQuestion(question) {
+  questionContainer.textContent = question.question;
+
+  // create a variable for options-container id.
+  var optionsContainer = document.getElementById("options-container");
+  optionsContainer.innerHTML = "";
+
+  // creates a button for each answer in the object array.
+  question.options.forEach((option) => {
+    var optionElement = document.createElement("button");
+    optionElement.textContent = option;
+    var result = optionElement.addEventListener("click", () =>
+      checkAnswer(option, question.correctAnswer)
+    );
+    optionsContainer.appendChild(optionElement);
+  });
 }
 
-// Questions & Answers
-var questionsAnswers = {
-    question: "What did the quick brown fox do?",
-    answer1: "Jump over the lazy dog",
-    answer2: "run into the TARDIS",
-    answer3: "played Global Thermonucleare Warfare",
-    answer4: "cut Frank Poole's life support, while in space"
+var startButtonEl = document.getElementById("start-button");
+
+function startGame () {
+  displayQuestion(quizQuestions[currentQuestionIndex]);
+  timeCountdown();
 }
 
-correctButton.addEventListener("click", correctAnswer);
-incorrectButton.addEventListener("click", incorrectAnswer);
-highscoreButton.addEventListener("click", showHideHighscore);
+startButtonEl.addEventListener("click", startGame);
