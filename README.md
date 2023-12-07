@@ -4,6 +4,8 @@ A fun little website that tests your knowledge on web development! [Link to Webs
 
 ## Overview
 
+![OverviewPicture](docs/images/screencapture-blockdoyle-github-io-web-development-quiz-2023-12-07-17_03_10.png)
+
 This website has a quiz that has beginner level questions to test the user. It uses object arrays to stroe the question and then a 'for loop' loops through all the qestions. When all of the questions have been answered, the webpage will present a text input form that asks for the user's name. When submitted, it is put in localstorage and displayed in the highscore-window.
 
 The highscore-window can be displayed by clicking on the "Highscore" text at the top-left of the page.
