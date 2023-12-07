@@ -65,8 +65,19 @@ main {
 
 #question-card-items {
   display: flex;
-  flex-flow: column;
-  text-align: center;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+#start {
+  display: flex;
+  justify-content: center;
+}
+
+#start button {
+  height: 4rem;
+  width: 10rem;
+  align-self: center;
 }
 
 #question-container {
@@ -74,9 +85,12 @@ main {
   color: white;
   padding: 10px;
   font-size: 36px;
+  text-align: center;
 }
 
 #options-container button {
+  display: flex;
+  justify-content: center;
   margin: auto;
   margin-top: 15px;
   padding: 10px;

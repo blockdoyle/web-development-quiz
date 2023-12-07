@@ -7,8 +7,12 @@ var incorrectButton = document.querySelector(".incorrect");
 var highscoreButton = document.getElementById("highscore-button");
 var questionEl = document.getElementById("question");
 var answersEl = document.getElementById("answers");
+var startButtonEl = document.getElementById("start-button");
+var wholeCard = document.getElementById("question-card-items");
 // set the question index to 0. this will pull the first question and the set of answers to go with it from the array.
 var currentQuestionIndex = 0;
+// global variable used to stop the countdown timer
+var isDone = false;
 
 // Highscore
 // Toggles the highscore window from showing/hiding.
@@ -30,14 +34,13 @@ function registerHighscore() {
 }
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
-function timeCountdown() {
+var timeCountdown = function() {
   var timeInterval = setInterval(function () {
     var currentTime = timeLeftEl.textContent;
-    if (currentTime > 0) {
+    if (currentTime > 0 && isDone === false) {
       currentTime--;
       timeLeftEl.textContent = currentTime;
     } else {
-      timeLeftEl.textContent = "Game Over";
       clearInterval(timeInterval);
     }
     // console.log(timeLeftEl.textContent)
@@ -83,6 +86,10 @@ function checkAnswer(selected, correct) {
     if (currentQuestionIndex < quizQuestions.length) {
       // Display the next question
       displayQuestion(quizQuestions[currentQuestionIndex]);
+    } else {
+      wholeCard.innerHTML = '';
+      isDone = true;
+      createHighScoreForm();
     }
     // otherwise, remove 5 seconds from the countdown
   } else {
@@ -112,10 +119,19 @@ function displayQuestion(question) {
   });
 }
 
-var startButtonEl = document.getElementById("start-button");
+function showHideStartButton () {
+  var x = document.getElementById("start");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 function startGame () {
+  currentQuestionIndex = 0;
   displayQuestion(quizQuestions[currentQuestionIndex]);
+  showHideStartButton();
   timeCountdown();
 }
 
