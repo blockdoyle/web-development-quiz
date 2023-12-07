@@ -24,6 +24,28 @@ function showHideHighscore() {
   }
 }
 
+function appendHighscoreToList() {
+  // Get the stored highscore from local storage
+  var storedHighscore = localStorage.getItem("userNameScore");
+
+  // Check if there's a highscore in local storage
+  if (storedHighscore) {
+      // Get the stored highscore as a JSON object
+      var parsedHighscore = JSON.parse(storedHighscore);
+
+      // Create a list item element
+      var li = document.createElement("li");
+
+      // Set the text for the list item
+      li.textContent = `${parsedHighscore.name}: ${parsedHighscore.score}`;
+
+      // Append the list item to the "saved" list
+      var savedList = document.getElementById("saved");
+      savedList.appendChild(li);
+      highscoreNumberEl.textContent = `${parsedHighscore.score}`;
+  }
+}
+
 // Takes the total score and stores it in local storage.
 function addHighscoreToLocalStorage(event) {
   event.preventDefault();
@@ -45,6 +67,9 @@ function addHighscoreToLocalStorage(event) {
 }
 
 var createHighScoreForm = function () {
+  // clear card elements
+  wholeCard.innerHTML = "";
+
   // create the form element for styling
   var form = document.createElement("form");
 
@@ -71,6 +96,7 @@ var createHighScoreForm = function () {
 
   // send data to addHighscoreToList on submit
   form.addEventListener("submit", addHighscoreToLocalStorage);
+  form.addEventListener("submit", appendHighscoreToList);
 };
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
@@ -81,6 +107,8 @@ var timeCountdown = function () {
       currentTime--;
       timeLeftEl.textContent = currentTime;
     } else {
+      isDone = true;
+      createHighScoreForm();
       clearInterval(timeInterval);
     }
     // console.log(timeLeftEl.textContent)
@@ -101,9 +129,9 @@ const quizQuestions = [
     correctAnswer: "Jump over the lazy dog",
   },
   {
-    question: "Test",
-    options: ["Correct", "Incorrect", "Incorrect", "Incorrect"],
-    correctAnswer: "Correct",
+    question: "",
+    options: ["", "", "", ""],
+    correctAnswer: "",
   },
   // Add more questions as needed
 ];
@@ -126,7 +154,6 @@ function checkAnswer(selected, correct) {
       // Display the next question
       displayQuestion(quizQuestions[currentQuestionIndex]);
     } else {
-      wholeCard.innerHTML = "";
       isDone = true;
       createHighScoreForm();
     }
@@ -177,3 +204,4 @@ function startGame() {
 startButtonEl.addEventListener("click", startGame);
 // when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
 highscoreButton.addEventListener("click", showHideHighscore);
+appendHighscoreToList();
