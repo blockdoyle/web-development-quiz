@@ -27,7 +27,7 @@ function showHideHighscore() {
 }
 
 // Takes the total score and stores it in local storage.
-function addHighscoreToLocalStorage (event) {
+function addHighscoreToLocalStorage(event) {
   event.preventDefault();
 
   // Get name from input
@@ -46,21 +46,21 @@ function addHighscoreToLocalStorage (event) {
   localStorage.setItem("userNameScore", jsonUserNameScore);
 }
 
-var createHighScoreForm = function() {
+var createHighScoreForm = function () {
   // create the form element for styling
   var form = document.createElement("form");
 
   var hsTitle = document.createElement("h3");
-  hsTitle.textContent = "Enter your name to save your highscore!"
+  hsTitle.textContent = "Enter your name to save your highscore!";
   hsTitle.style.color = "white";
   wholeCard.appendChild(hsTitle);
-  
+
   // create the input element that takes a users name
-  var input = document.createElement("input")
+  var input = document.createElement("input");
   input.type = "text";
   input.placeholder = "Enter your name";
   input.id = "inputText";
-  form.appendChild(input)
+  form.appendChild(input);
 
   // create the submit button
   var submitButton = document.createElement("input");
@@ -70,13 +70,13 @@ var createHighScoreForm = function() {
 
   // append the form to the wholeCard div
   wholeCard.appendChild(form);
-  
+
   // send data to addHighscoreToList on submit
   form.addEventListener("submit", addHighscoreToLocalStorage);
-}
+};
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
-var timeCountdown = function() {
+var timeCountdown = function () {
   var timeInterval = setInterval(function () {
     var currentTime = timeLeftEl.textContent;
     if (currentTime > 0 && isDone === false) {
@@ -87,7 +87,7 @@ var timeCountdown = function() {
     }
     // console.log(timeLeftEl.textContent)
   }, 1000);
-}
+};
 
 // Main card stuff
 // Questions & Answers
@@ -129,7 +129,7 @@ function checkAnswer(selected, correct) {
       // Display the next question
       displayQuestion(quizQuestions[currentQuestionIndex]);
     } else {
-      wholeCard.innerHTML = '';
+      wholeCard.innerHTML = "";
       isDone = true;
       createHighScoreForm();
     }
@@ -161,7 +161,7 @@ function displayQuestion(question) {
   });
 }
 
-function showHideStartButton () {
+function showHideStartButton() {
   var x = document.getElementById("start");
   if (x.style.display === "none") {
     x.style.display = "flex";
@@ -170,7 +170,7 @@ function showHideStartButton () {
   }
 }
 
-function startGame () {
+function startGame() {
   currentQuestionIndex = 0;
   displayQuestion(quizQuestions[currentQuestionIndex]);
   showHideStartButton();
