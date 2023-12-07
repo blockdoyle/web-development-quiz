@@ -25,12 +25,35 @@ function showHideHighscore() {
   }
 }
 
-// when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
-highscoreButton.addEventListener("click", showHideHighscore);
-
 // Takes the total score and stores it in local storage.
-function registerHighscore() {
+function currentHighscore() {
   highscoreNumberEl.textContent = currentScoreEl.textContent;
+}
+
+var createHighScoreForm = function() {
+  // create the form element for styling
+  var form = document.createElement("form");
+
+  var hsTitle = document.createElement("h3");
+  hsTitle.textContent = "Enter your name to save your highscore!"
+  hsTitle.style.color = "white";
+  wholeCard.appendChild(hsTitle);
+  
+  // create the input element that takes a users name
+  var input = document.createElement("input")
+  input.type = "text";
+  input.placeholder = "Enter your name";
+  input.id = "inputText";
+  form.appendChild(input)
+
+  // create the submit button
+  var submitButton = document.createElement("input");
+  submitButton.type = "submit";
+  submitButton.value = "Submit";
+  form.append(submitButton);
+
+  // append the form to the wholeCard div
+  wholeCard.appendChild(form);
 }
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
@@ -77,7 +100,7 @@ function checkAnswer(selected, correct) {
   if (selected == correct) {
     currentScore++;
     currentScoreEl.textContent = currentScore;
-    registerHighscore();
+    currentHighscore();
 
     // Move to next question
     currentQuestionIndex++;
@@ -136,3 +159,5 @@ function startGame () {
 }
 
 startButtonEl.addEventListener("click", startGame);
+// when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
+highscoreButton.addEventListener("click", showHideHighscore);
