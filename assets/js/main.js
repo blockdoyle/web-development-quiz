@@ -117,7 +117,6 @@ function checkAnswer(selected, correct) {
   if (selected == correct) {
     currentScore++;
     currentScoreEl.textContent = currentScore;
-    currentHighscore();
 
     // Move to next question
     currentQuestionIndex++;
