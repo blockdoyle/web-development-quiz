@@ -78,6 +78,7 @@ main {
   height: 4rem;
   width: 10rem;
   align-self: center;
+  font-weight: bolder;
 }
 
 #question-container {
