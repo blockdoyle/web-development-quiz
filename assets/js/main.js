@@ -30,9 +30,14 @@ function appendHighscoreToList() {
 
   // Check if there's a highscore in local storage
   if (storedHighscore) {
-      // Get the stored highscore as a JSON object
-      var parsedHighscore = JSON.parse(storedHighscore);
+    // Get the stored highscore as a JSON object
+    var parsedHighscore = JSON.parse(storedHighscore);
 
+    // Get the current highscore
+    var currentHighscore = parseInt(highscoreNumberEl.textContent);
+
+    // Compare with the stored highscore
+    if (parsedHighscore.score > currentHighscore) {
       // Create a list item element
       var li = document.createElement("li");
 
@@ -42,10 +47,12 @@ function appendHighscoreToList() {
       // Append the list item to the "saved" list
       var savedList = document.getElementById("saved");
       savedList.appendChild(li);
+
+      // Update the highscore
       highscoreNumberEl.textContent = `${parsedHighscore.score}`;
+    }
   }
 }
-
 // Takes the total score and stores it in local storage.
 function addHighscoreToLocalStorage(event) {
   event.preventDefault();
