@@ -24,6 +24,16 @@ function showHideHighscore() {
   }
 }
 
+function showHideStartButton() {
+  var x = document.getElementById("start");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
 function appendHighscoreToList() {
   // Get the stored highscore from local storage
   var storedHighscore = localStorage.getItem("userNameScore");
