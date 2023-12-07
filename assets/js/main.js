@@ -24,6 +24,16 @@ function showHideHighscore() {
   }
 }
 
+function showHideStartButton() {
+  var x = document.getElementById("start");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
 function appendHighscoreToList() {
   // Get the stored highscore from local storage
   var storedHighscore = localStorage.getItem("userNameScore");
@@ -71,6 +81,12 @@ function addHighscoreToLocalStorage(event) {
 
   // Store jsonUserNameScore in localstorage
   localStorage.setItem("userNameScore", jsonUserNameScore);
+  // show the start button after submitting the form
+  showStartButton();
+}
+
+function showStartButton() {
+  question
 }
 
 var createHighScoreForm = function () {
@@ -292,15 +308,7 @@ function displayQuestion(question) {
   });
 }
 
-function showHideStartButton() {
-  var x = document.getElementById("start");
-  if (x.style.display === "none") {
-    x.style.display = "flex";
-  } else {
-    x.style.display = "none";
-  }
-}
-
+// starts the game by getting the first question in array
 function startGame() {
   currentQuestionIndex = 0;
   displayQuestion(quizQuestions[currentQuestionIndex]);
@@ -308,7 +316,7 @@ function startGame() {
   timeCountdown();
 }
 
+// calls the startGame function
 startButtonEl.addEventListener("click", startGame);
 // when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
 highscoreButton.addEventListener("click", showHideHighscore);
-appendHighscoreToList();
