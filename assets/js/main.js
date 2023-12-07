@@ -119,19 +119,119 @@ var timeCountdown = function () {
 // Questions & Answers
 const quizQuestions = [
   {
-    question: "What did the quick brown fox do?",
-    options: [
-      "Cut Frank Poole's life support",
-      "Jump over the lazy dog",
-      "Play Global Thermonuclear Warfare",
-      "Run into the TARDIS",
-    ],
-    correctAnswer: "Jump over the lazy dog",
+    question: "What does HTML stand for?",
+    options: ["Hyper Text Markup Language", "High Tech Markup Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"],
+    correctAnswer: "Hyper Text Markup Language",
   },
   {
-    question: "",
-    options: ["", "", "", ""],
-    correctAnswer: "",
+    question: "Which tag is used to create a hyperlink in HTML?",
+    options: ["<link>", "<a>", "<hype>", "<url>"],
+    correctAnswer: "<a>",
+  },
+  {
+    question: "What does CSS stand for?",
+    options: ["Counter Strike: Source", "Computer Style Sheet", "Creative Style Sheet", "Cascading Style Sheet"],
+    correctAnswer: "Cascading Style Sheet",
+  },
+  {
+    question: "How do you select an element with the id 'example' in CSS?",
+    options: ["#example", ".example", "element.example", "id.example"],
+    correctAnswer: "#example",
+  },
+  {
+    question: "Which programming language is primarily used for client-side scripting in web development?",
+    options: ["Java", "Python", "C#", "JavaScript"],
+    correctAnswer: "JavaScript",
+  },
+  {
+    question: "What does the 'HTTP' acronym stand for?",
+    options: ["HyperText Transfer Protocol", "HyperText Type Protocol", "High Tech Transfer Protocol", "Home Tool Type Protocol"],
+    correctAnswer: "HyperText Transfer Protocol",
+  },
+  {
+    question: "In JavaScript, how do you declare a variable?",
+    options: ["var x;", "variable x;", "x = var;", "declare x;"],
+    correctAnswer: "var x;",
+  },
+  {
+    question: "Which function is used to print content to the console in JavaScript?",
+    options: ["console.print()", "log.console()", "print.console()", "console.log()"],
+    correctAnswer: "console.log()",
+  },
+  {
+    question: "What is the purpose of the <head> tag in HTML?",
+    options: ["To define the main content of the document", "To define a header for the document", "To contain metadata about the document", "To create a navigation bar"],
+    correctAnswer: "To contain metadata about the document",
+  },
+  {
+    question: "Which attribute is used to include an external JavaScript file?",
+    options: ["src", "link", "href", "script"],
+    correctAnswer: "src",
+  },
+  {
+    question: "What is the box model in CSS?",
+    options: ["A model for organizing text content", "A model for creating 3D effects", "A model for designing interfaces", "A model describing how elements are spaced and sized"],
+    correctAnswer: "A model describing how elements are spaced and sized",
+  },
+  {
+    question: "Which tag is used to create an unordered list in HTML?",
+    options: ["<list>", "<ul>", "<ol>", "<li>"],
+    correctAnswer: "<ul>",
+  },
+  {
+    question: "What is the purpose of the 'border' property in CSS?",
+    options: ["To set the background color", "To define the font style", "To create space around an element", "To define the border around an element"],
+    correctAnswer: "To define the border around an element",
+  },
+  {
+    question: "What is the purpose of the 'float' property in CSS?",
+    options: ["To move an element to the right", "To make an element float on water", "To create a floating effect", "To specify whether an element should be to the left or right of its container"],
+    correctAnswer: "To specify whether an element should be to the left or right of its container",
+  },
+  {
+    question: "Which event is triggered when a user clicks on an HTML element?",
+    options: ["onmouseover", "onchange", "onsubmit", "onclick"],
+    correctAnswer: "onclick",
+  },
+  {
+    question: "What is the purpose of the 'margin' property in CSS?",
+    options: ["To set the space between elements", "To create space inside an element", "To define the outer border of an element", "To set the background color"],
+    correctAnswer: "To set the space between elements",
+  },
+  {
+    question: "How do you comment out multiple lines in JavaScript?",
+    options: ["/* This is a comment */", "// This is a comment", "<!-- This is a comment -->", "(* This is a comment *)"],
+    correctAnswer: "/* This is a comment */",
+  },
+  {
+    question: "Which tag is used to define an image in HTML?",
+    options: ["<image>", "<img>", "<picture>", "<photo>"],
+    correctAnswer: "<img>",
+  },
+  {
+    question: "What is the purpose of the 'position' property in CSS?",
+    options: ["To set the font size", "To define the layout of an element", "To create animation effects", "To specify the type of positioning method used for an element"],
+    correctAnswer: "To specify the type of positioning method used for an element",
+  },
+  {
+    question: "Which attribute is used to define the source URL of an iframe element?",
+    options: ["url", "src", "link", "href"],
+    correctAnswer: "src",
+  },
+  {
+    question: "What is the purpose of the 'opacity' property in CSS?",
+    options: ["To set the transparency of an element", "To define the color of an element", "To create a shadow effect", "To set the size of an element"],
+    correctAnswer: "To set the transparency of an element",
+  },
+  {
+    question: "Which HTML tag is used to define the structure of an HTML document?",
+    options: ["<header>", "<structure>", "<html>", "<document>"],
+    correctAnswer: "<html>",
+  },
+  {
+    question: "What is the purpose of the 'font-family' property in CSS?",
+    options: ["To set the font color", "To define the font size", "To specify the font used for an element", "To create a bold effect"],
+    correctAnswer: "To specify the font used for an element",
   },
   // Add more questions as needed
 ];
