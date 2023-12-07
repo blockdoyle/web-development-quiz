@@ -4,8 +4,8 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
 }
 
 header {
@@ -29,21 +29,21 @@ main {
 }
 
 #highscore-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #highscore-window {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    padding: 20px;
-    border: 2px solid;
-    background-color: yellow;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  padding: 20px;
+  border: 2px solid;
+  background-color: yellow;
 }
 
 #highscore-window ol {
-    list-style: disc;
-    padding-left: 10px;
+  list-style: disc;
+  padding-left: 10px;
 }
 
 #question-card {
@@ -60,13 +60,24 @@ main {
     rgba(9, 9, 121, 1) 31%,
     rgba(0, 212, 255, 1) 100%
   );
-  box-shadow: 19px 20px 20px 20px rgba(255,255,255,0.75)
+  box-shadow: 19px 20px 20px 20px rgba(255, 255, 255, 0.75);
 }
 
 #question-card-items {
   display: flex;
-  flex-flow: column;
-  text-align: center;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+#start {
+  display: flex;
+  justify-content: center;
+}
+
+#start button {
+  height: 4rem;
+  width: 10rem;
+  align-self: center;
 }
 
 #question-container {
@@ -74,9 +85,12 @@ main {
   color: white;
   padding: 10px;
   font-size: 36px;
+  text-align: center;
 }
 
 #options-container button {
+  display: flex;
+  justify-content: center;
   margin: auto;
   margin-top: 15px;
   padding: 10px;
