@@ -320,3 +320,4 @@ function startGame() {
 startButtonEl.addEventListener("click", startGame);
 // when user clicks "Highscore" on the top-left of the screen, it executes showHideHighscore function
 highscoreButton.addEventListener("click", showHideHighscore);
+appendHighscoreToList();
