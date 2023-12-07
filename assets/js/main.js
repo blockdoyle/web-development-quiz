@@ -9,6 +9,7 @@ var questionEl = document.getElementById("question");
 var answersEl = document.getElementById("answers");
 var startButtonEl = document.getElementById("start-button");
 var wholeCard = document.getElementById("question-card-items");
+var savedEl = document.getElementById("saved");
 // set the question index to 0. this will pull the first question and the set of answers to go with it from the array.
 var currentQuestionIndex = 0;
 // global variable used to stop the countdown timer
@@ -26,8 +27,23 @@ function showHideHighscore() {
 }
 
 // Takes the total score and stores it in local storage.
-function currentHighscore() {
-  highscoreNumberEl.textContent = currentScoreEl.textContent;
+function addHighscoreToLocalStorage (event) {
+  event.preventDefault();
+
+  // Get name from input
+  var nameValue = document.getElementById("inputText").value;
+  var scoreValue = document.getElementById("current-score").textContent;
+
+  var userNameScore = {
+    name: nameValue,
+    score: scoreValue,
+  };
+
+  // Convert userNameScore object as a string
+  var jsonUserNameScore = JSON.stringify(userNameScore);
+
+  // Store jsonUserNameScore in localstorage
+  localStorage.setItem("userNameScore", jsonUserNameScore);
 }
 
 var createHighScoreForm = function() {
@@ -54,6 +70,9 @@ var createHighScoreForm = function() {
 
   // append the form to the wholeCard div
   wholeCard.appendChild(form);
+  
+  // send data to addHighscoreToList on submit
+  form.addEventListener("submit", addHighscoreToLocalStorage);
 }
 
 // Starts countdown from 90 seconds and runs until it reaches 0.
